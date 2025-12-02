@@ -186,8 +186,18 @@ export class Router {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
 
-      const data = await response.json() as JsonRpcResponse;
-      return data;
+      const data = await response.json();
+
+      if (!data || typeof data !== "object") {
+        throw new Error("Invalid JSON-RPC response: not an object");
+      }
+
+      // Check for result or error
+      if (!("result" in data) && !("error" in data)) {
+        throw new Error("Invalid JSON-RPC response: missing result or error");
+      }
+
+      return data as JsonRpcResponse;
 
     } catch (error) {
       clearTimeout(timeoutId);
