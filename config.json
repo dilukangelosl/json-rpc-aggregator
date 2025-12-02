@@ -1,0 +1,41 @@
+{
+  "server": {
+    "port": 8545,
+    "host": "0.0.0.0"
+  },
+  "loadBalancing": {
+    "strategy": "round-robin",
+    "retries": 3,
+    "retryDelay": 100,
+    "timeout": 30000
+  },
+  "healthCheck": {
+    "enabled": true,
+    "interval": 30000,
+    "timeout": 5000,
+    "unhealthyThreshold": 3,
+    "healthyThreshold": 2
+  },
+  "rpcs": [
+    {
+      "url": "https://eth.llamarpc.com",
+      "weight": 1
+    },
+    {
+      "url": "https://ethereum.publicnode.com",
+      "weight": 1
+    },
+    {
+      "url": "https://1rpc.io/eth",
+      "weight": 1
+    },
+    {
+      "url": "https://eth.drpc.org",
+      "weight": 1
+    },
+    {
+      "url": "https://cloudflare-eth.com",
+      "weight": 1
+    }
+  ]
+}
